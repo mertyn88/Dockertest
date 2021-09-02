@@ -1,0 +1,42 @@
+buildscript {
+    ext {
+        springBootVersion = "2.1.6.RELEASE"
+    }
+}
+
+plugins {
+    id 'java'
+    id 'war'
+    id 'maven'
+    id 'maven-publish'
+    id 'idea'
+    id 'org.springframework.boot' version "$springBootVersion"
+}
+
+wrapper {
+    gradleVersion = "5.6.4"
+    distributionUrl = "https://services.gradle.org/distributions/gradle-$gradleVersion-all.zip"
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+bootWar {
+    enabled = true
+}
+
+// compile encoding 설정.
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    implementation("org.springframework.boot:spring-boot-starter-web:${springBootVersion}")
+}
