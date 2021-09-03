@@ -125,7 +125,7 @@ Dockerhub에 정상적으로 이미지가 push되었는지 확인
 
 
 ### 쿠버네티스 배포파일(deployment.yaml 파일 생성)
-다음 3가지 명령어로 deployment.yaml의 내용을 채운다
+다음 3가지 명령어로 deployment.yaml의 내용을 채운다  
 [deployment.yaml](https://github.com/mertyn88/Dockertest/blob/master/deployment.yaml)
 ```bash
 $kubectl create deployment [프로젝트명] --image=[도커허브ID]/[프로젝트명] --dry-run=client -o=yaml > deployment.yaml
