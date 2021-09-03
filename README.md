@@ -23,7 +23,7 @@ Kubernetes master is running at https://kubernetes.docker.internal:6443
 KubeDNS is running at https://kubernetes.docker.internal:6443/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
 ```
 
-### 쿠버네티스 정보 확인하기 ( 이미 example이 배포중이여서 표시가 되는 중, 실제 처음설치하면 example은 없다)
+### 쿠버네티스 정보 확인하기
 > ```bash
 $kubectl get all
 ```
@@ -48,9 +48,11 @@ $kubectl proxy
 
 ### Dashboard Proxy Token 추출
 여기서는 Token값을 추출하여 접속하는 방식으로 한다. 해당 명령어로 Token값을 추출하고, 복사하여 접속한다.
-```bash
+
+>```bash
 $kubectl -n kube-system describe secret $(kubectl -n kube-system get secret | grep admin-user | awk '{print $1}')
 ```
+
 **접속화면**
 ![](https://images.velog.io/images/mertyn88/post/00e3d324-ac59-4605-be11-245a937eda5e/image.png)
 
