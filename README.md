@@ -83,7 +83,7 @@ war파일을 app.war로 복사하여 이름을 명확히 명시한다.
 
 > _**ENTRYPOINT ["java", "-Djava.security.egd=file:/dev/./urandom","-jar","/app.war"]**_
 
-docker가 실행되고 나서 수행되어야 하는 명령을 작성한다. 여기서 java.security.egd에 대해서 -D옵션을 주었는데 몰라서 찾아보니 다음과 같다.
+docker가 실행되고 나서 수행되어야 하는 명령을 작성한다. 여기서 java.security.egd에 대해서 -D옵션을 주었는데 몰라서 찾아보니 다음과 같다.  
 [/dev/./urandom을 사용하는 이유](https://www.kangwoo.kr/2018/02/06/spring-boot-%EC%8B%9C%EC%9E%91%EC%8B%9C-dev-urandom%EC%9D%84-%EC%82%AC%EC%9A%A9%ED%95%98%EB%8A%94-%EC%9D%B4%EC%9C%A0/)
 ```text
 스프링 부트를 이용해서 웹 애플리케이션을 만들 때, 기본적으로 톰캣을 이용하게 됩니다.
