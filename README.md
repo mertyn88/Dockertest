@@ -1,7 +1,7 @@
 ## 쿠버네티스 설치
 ### 도커 설치 [(Homebrew로 Mac에 도커 설치하기)](https://dc7303.github.io/docker/2019/11/24/dockerInstallForMac/)
 
->```bash
+```bash
 brew install --cask docker # 참고 사이트에서 알려주는 brew cask install docker 는 예전방식이라서 제대로 동작하지 않음
 ```
 
@@ -17,14 +17,14 @@ brew install --cask docker # 참고 사이트에서 알려주는 brew cask insta
 
 
 ### 쿠버네티스 정상 구동 확인하기
->```bash
+```bash
 $kubectl cluster-info
 Kubernetes master is running at https://kubernetes.docker.internal:6443
 KubeDNS is running at https://kubernetes.docker.internal:6443/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
 ```
 
 ### 쿠버네티스 정보 확인하기
-> ```bash
+```bash
 $kubectl get all
 ```
   
@@ -32,12 +32,12 @@ $kubectl get all
 ### Dashboard 설치
 대시보드 설치는 미리 원격지에 정의되어 있는 kubernetes-dashboard.yaml 설정 파일을 통해 설치가 가능. 쿠버네티스 특정 이미지들을 올리는 작업이 있다.
 
-> ```bash
+```bash
 $kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.0-beta1/aio/deploy/recommended.yaml
 ```
 
 ### Dashboard Proxy 실행 (기본 포트 8001)
->```bash
+```bash
 $kubectl proxy  
 ```
 
@@ -49,7 +49,7 @@ $kubectl proxy
 ### Dashboard Proxy Token 추출
 여기서는 Token값을 추출하여 접속하는 방식으로 한다. 해당 명령어로 Token값을 추출하고, 복사하여 접속한다.
 
->```bash
+```bash
 $kubectl -n kube-system describe secret $(kubectl -n kube-system get secret | grep admin-user | awk '{print $1}')
 ```
 
@@ -97,14 +97,14 @@ Java5 이휴의 특정 버전에서는 /dev/urandom을 설정하면, /dev/random
 
 ### 프로젝트 build
 
-> ```bash
+```bash
 #war 파일 생성
 $./gradlew clean build
 ```
 
 
 ### Docker build & check
-> ```bash
+```bash
 #build
 docker build -t [도커허브ID]/[프로젝트명] .
 #check
@@ -112,7 +112,7 @@ docker images
 ```
 
 ### Docker login & push
-> ```bash
+```bash
 #login
 docker login
 #push
@@ -127,14 +127,14 @@ Dockerhub에 정상적으로 이미지가 push되었는지 확인
 ### 쿠버네티스 배포파일(deployment.yaml 파일 생성)
 다음 3가지 명령어로 deployment.yaml의 내용을 채운다
 [deployment.yaml](https://github.com/mertyn88/Dockertest/blob/master/deployment.yaml)
->```bash
+```bash
 $kubectl create deployment [프로젝트명] --image=[도커허브ID]/[프로젝트명] --dry-run=client -o=yaml > deployment.yaml
 $echo --- >> deployment.yaml
 $kubectl create service clusterip [프로젝트명] --tcp=8080:8080 --dry-run=client -o=yaml >> deployment.yaml
 ```
 
 ### 쿠버네티스 배포 및 확인
->```bash
+```bash
 #deploy
 $kubectl apply -f deployment.yaml
 #check
@@ -146,7 +146,7 @@ $kubectl get all | grep [프로젝트명]
 ![](https://images.velog.io/images/mertyn88/post/94b0791e-3ad4-4a82-ab24-d3733c36156e/image.png)
 
 ### 외부 http 포트포워딩
->```bash
+```bash
 $kubectl port-forward svc/example 8080:8080
 #daemon print
 Forwarding from 127.0.0.1:8080 -> 8080
